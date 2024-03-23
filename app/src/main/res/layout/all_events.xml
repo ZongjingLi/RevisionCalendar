@@ -10,20 +10,19 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="411dp"
-        android:layout_height="734dp"
+        android:layout_width="400dp"
+        android:layout_height="627dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/A"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/Lecture" />
 
     <TextView
         android:id="@+id/month_YearTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="4dp"
         android:layout_weight="2"
         android:text="Feb 2024"
         android:textAlignment="center"
@@ -32,7 +31,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/backButton"
@@ -58,40 +58,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
+
     <Button
-        android:id="@+id/A"
+        android:id="@+id/Exam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="320dp"
-        android:layout_marginBottom="652dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="644dp"
         android:clickable="true"
-        android:text="A"
+        android:text="Exam"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Lecture"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-
     <Button
-        android:id="@+id/B"
+        android:id="@+id/Lecture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="652dp"
-        android:layout_marginStart="160dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="644dp"
         android:clickable="true"
-        android:text="B"
+        android:text="Lecture"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ToDos"
+        app:layout_constraintTop_toBottomOf="@+id/month_YearTV"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-
     <Button
-        android:id="@+id/C"
+        android:id="@+id/ToDos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
-        android:layout_marginBottom="652dp"
-        android:text="C"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="644dp"
+        android:text="ToDos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

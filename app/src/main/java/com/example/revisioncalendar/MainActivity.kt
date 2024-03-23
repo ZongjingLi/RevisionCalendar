@@ -1,5 +1,6 @@
 package com.example.revisioncalendar
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,6 +19,7 @@ class MainActivity : ComponentActivity() {
     var calendarView: CalendarView? = null;
     var toDoList: ListView? = null
 
+    @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main);
@@ -25,6 +27,21 @@ class MainActivity : ComponentActivity() {
         setupCalendar();
         setupData();
         updateItems();
+
+        val db = DataBaseHandle(this, null)
+        //db.addCourse("Namomo", "Scourge");
+        //db.addCourse("Acherus", "NewAvalon")
+
+        val cursor = db.getCourse()
+        cursor!!.moveToFirst()
+
+        while(cursor.moveToNext()){
+            System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) + "\n")
+            System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.AGE_COL)) + "\n")
+            db.deleteCourse(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) );
+        }
+        cursor?.close()
+
     }
 
     fun setupWigits() {
@@ -35,8 +52,6 @@ class MainActivity : ComponentActivity() {
                 ToDoListActivity::class.java
             )
             //intent.putExtra("Data",eventsData);
-            eventsData.add(0, Activity("Kel", "Nugu", "Sia"));
-            System.out.println(eventsData.get(0));
             startActivity(intent)
         })
     }
@@ -60,8 +75,7 @@ class MainActivity : ComponentActivity() {
     }
 
     fun setupData() {
-        eventsData.add(Activity("Scourge", "Namo", "Kara"));
-        eventsData.add(Activity("Kelthuzad", "Namo", "Kara"));
+        val db = DataBaseHandle(this, null)
     }
 
     fun showSoftKeyboard(view: View) {
