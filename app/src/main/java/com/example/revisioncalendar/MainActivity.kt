@@ -7,26 +7,24 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.CalendarView
+import android.widget.CalendarView.OnDateChangeListener
+import android.widget.ListView
 import androidx.activity.ComponentActivity
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.revisioncalendar.DataWrapper.Activity
-import com.example.revisioncalendar.ui.theme.RevisionCalendarTheme
 
 class MainActivity : ComponentActivity() {
     var buttonToActivity: Button? = null;
     var eventsData: ArrayList<Activity> = ArrayList<Activity>();
     var calendarView: CalendarView? = null;
+    var toDoList: ListView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main);
         setupWigits();
         setupCalendar();
         setupData();
-        System.out.println("This is an actual real page.");
-        System.out.println(eventsData.get(0));
+        updateItems();
     }
 
     fun setupWigits() {
@@ -37,19 +35,33 @@ class MainActivity : ComponentActivity() {
                 ToDoListActivity::class.java
             )
             //intent.putExtra("Data",eventsData);
+            eventsData.add(0, Activity("Kel", "Nugu", "Sia"));
+            System.out.println(eventsData.get(0));
             startActivity(intent)
-            System.out.println("This is button onclick");
         })
-        System.out.println("Try to setup the wigets.");
     }
 
     fun setupCalendar() {
         calendarView = findViewById(R.id.main_calendar) as CalendarView;
-        System.out.println("Find the main calendar view.");
+        calendarView!!.setOnDateChangeListener(
+            OnDateChangeListener { view, year, month, dayOfMonth ->
+                val Date = (dayOfMonth.toString() + "-"
+                        + (month + 1) + "-" + year)
+                updateItems()
+            }
+        )
+    }
+
+    fun updateItems() {
+        // Deal with the doto list section.
+        toDoList = findViewById(R.id.mobile_list)
+        val customAdapter = ItemAdapter(applicationContext, eventsData)
+        toDoList!!.setAdapter(customAdapter)
     }
 
     fun setupData() {
-        eventsData.add(Activity("Scourge"));
+        eventsData.add(Activity("Scourge", "Namo", "Kara"));
+        eventsData.add(Activity("Kelthuzad", "Namo", "Kara"));
     }
 
     fun showSoftKeyboard(view: View) {
@@ -59,22 +71,6 @@ class MainActivity : ComponentActivity() {
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
     }
-}
 
 
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RevisionCalendarTheme {
-        Greeting("Android")
-    }
 }
