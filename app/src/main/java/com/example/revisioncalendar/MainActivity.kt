@@ -38,6 +38,7 @@ class MainActivity : ComponentActivity() {
             )
             //intent.putExtra("Data",eventsData);
             startActivity(intent)
+            System.out.println("This is button onclick");
         })
         System.out.println("Try to setup the wigets.");
     }
