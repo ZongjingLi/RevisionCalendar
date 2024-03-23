@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RevisionCalendar</string>
     <string name="week_mode">Week</string>
+    <string name="back">back</string>
 </resources>

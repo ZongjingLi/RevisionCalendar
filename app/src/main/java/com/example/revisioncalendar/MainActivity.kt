@@ -1,31 +1,29 @@
 package com.example.revisioncalendar
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.CalendarView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.ContextCompat.getSystemService
+import com.example.revisioncalendar.DataWrapper.Activity
 import com.example.revisioncalendar.ui.theme.RevisionCalendarTheme
-import java.time.LocalDateTime;
-import com.example.revisioncalendar.DataWrapper.Activity;
 
 class MainActivity : ComponentActivity() {
     var buttonToActivity: Button? = null;
     var eventsData: ArrayList<Activity> = ArrayList<Activity>();
+    var calendarView: CalendarView? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main);
         setupWigits();
+        setupCalendar();
         setupData();
         System.out.println("This is an actual real page.");
         System.out.println(eventsData.get(0));
@@ -33,7 +31,20 @@ class MainActivity : ComponentActivity() {
 
     fun setupWigits() {
         buttonToActivity = findViewById<View>(R.id.toSpecificButton) as Button
+        buttonToActivity!!.setOnClickListener(View.OnClickListener {
+            val intent: Intent = Intent(
+                this@MainActivity,
+                ToDoListActivity::class.java
+            )
+            //intent.putExtra("Data",eventsData);
+            startActivity(intent)
+        })
         System.out.println("Try to setup the wigets.");
+    }
+
+    fun setupCalendar() {
+        calendarView = findViewById(R.id.main_calendar) as CalendarView;
+        System.out.println("Find the main calendar view.");
     }
 
     fun setupData() {
