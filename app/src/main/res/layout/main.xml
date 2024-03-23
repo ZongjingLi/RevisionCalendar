@@ -10,4 +10,46 @@
     android:orientation="vertical"
     >
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <CalendarView
+            android:id="@+id/main_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="15dp"></CalendarView>
+
+        <ListView
+            android:id="@+id/mobile_list"
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            android:layout_marginVertical="340dp"></ListView>
+
+        <CheckBox
+            android:id="@+id/weekModeCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:buttonTint="@color/white"
+            android:padding="2dp"
+            android:text="@string/week_mode"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/toSpecificButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="600dp"
+            android:clickable="true"
+            android:text="..."
+            app:srcCompat="@android:drawable/ic_input_add" />
+    </FrameLayout>
+
+
 </LinearLayout>
