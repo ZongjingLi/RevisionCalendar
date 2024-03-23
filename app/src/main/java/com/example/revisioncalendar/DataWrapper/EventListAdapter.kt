@@ -26,7 +26,6 @@ class EventListAdapter(private var events: List<Activity>): RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val events = events[position]
-
         holder.apply{
             titleTextView.text = events.title
             typeTextView.text = events.type

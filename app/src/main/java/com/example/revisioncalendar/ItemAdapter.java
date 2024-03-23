@@ -33,15 +33,17 @@ public class ItemAdapter extends BaseAdapter {
         return 0;
     }
     public View getView(int i, View view, ViewGroup viewGroup) {
-        int fontSize = 18;
+        int fontSize = 12;
         view = inflter.inflate(R.layout.event_item, null);
 
         TextView activityName = view.findViewById(R.id.objTitle);
-        TextView activitType = view.findViewById(R.id.eventType);
+        TextView activityType = view.findViewById(R.id.eventType);
         TextView activityTime = view.findViewById(R.id.eventTime);
         TextView activityLocation = view.findViewById(R.id.eventLocation);
 
         activityName.setText(activityList.get(i).getTitle());
+        activityType.setText(activityList.get(i).getType());
+        activityLocation.setText(activityList.get(i).getLocation());
 
         return view;
     }

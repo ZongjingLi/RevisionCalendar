@@ -39,6 +39,16 @@ class ToDoListActivity : ComponentActivity() {
             //intent.putExtra("Data",eventsData);
             startActivity(intent)
         })
+
+        addEventButton = findViewById<View>(R.id.toSpecificButton) as Button;
+        addEventButton!!.setOnClickListener(View.OnClickListener {
+            val intent: Intent = Intent(
+                this@ToDoListActivity,
+                AddEventsActivity::class.java
+            )
+            //intent.putExtra("Data",eventsData);
+            startActivity(intent)
+        })
     }
 
 }
