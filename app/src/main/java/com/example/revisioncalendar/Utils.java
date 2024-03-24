@@ -66,9 +66,8 @@ public class Utils {
             return false;
         }
 
-        String regex = "^\\d{1,2}-\\d{1,2}-\\d{2}$";
+        String regex = "^\\d{1,2}-\\d{1,2}-\\d{4}$";
 
-        // 使用正则表达式检查字符串是否符合规范
         return str.matches(regex);
 
     }

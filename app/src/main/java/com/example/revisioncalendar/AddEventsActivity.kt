@@ -80,7 +80,7 @@ class AddEventsActivity : ComponentActivity() {
             var start_time = startDateBlock?.getText().toString()//"23-3-2024"
             var end_time = endDateBlock?.getText()//"23-3-2024"
 
-            if (Utils.validName(title) && Utils.validTime(start_time) {
+            if (Utils.validName(title) && Utils.validTime(start_time)) {
                 val db = DataBaseHandle(this, null)
                 val content = String.format("%s|%s|%s|%s|%s",title, type, location, start_time, end_time)
                 System.out.println(content)
@@ -94,6 +94,11 @@ class AddEventsActivity : ComponentActivity() {
                 //showPopUpWindow("Added Successfully", View)
 
             } else {
+                titleBlock?.setText("Invalid Inputs!");
+                typeBlock?.setText("Invalid Inputs!");
+                locationBlock?.setText("Invalid Inputs!");
+                startDateBlock?.setText("Invalid Inputs!");
+                endDateBlock?.setText("Invalid Inputs!");
                 //showPopUpWindow("Something is wrong", View);
             }
         })
