@@ -19,6 +19,8 @@ class MainActivity : ComponentActivity() {
     var calendarView: CalendarView? = null;
     var toDoList: ListView? = null
 
+    var curDate: String? = "23-3-2024";
+
     @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +31,19 @@ class MainActivity : ComponentActivity() {
         updateItems();
 
         val db = DataBaseHandle(this, null)
-        //db.addCourse("Namomo", "Scourge");
-        //db.addCourse("Acherus", "NewAvalon")
+
+        db.addCourse("CS2110", "Lecture", "Claus109", "25-3-2024", "25-4-2024")
+        db.addCourse("ISYE4699", "Lecture", "TBA", "25-3-2024", "25-4-2024");
+
 
         val cursor = db.getCourse()
         cursor!!.moveToFirst()
 
         while(cursor.moveToNext()){
             System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) + "\n")
-            System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.AGE_COL)) + "\n")
-            db.deleteCourse(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) );
+            //db.deleteCourse(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) );
         }
         cursor?.close()
-
     }
 
     fun setupWigits() {
@@ -60,16 +62,39 @@ class MainActivity : ComponentActivity() {
         calendarView = findViewById(R.id.main_calendar) as CalendarView;
         calendarView!!.setOnDateChangeListener(
             OnDateChangeListener { view, year, month, dayOfMonth ->
-                val Date = (dayOfMonth.toString() + "-"
+                val curDate = (dayOfMonth.toString() + "-"
                         + (month + 1) + "-" + year)
                 updateItems()
             }
         )
     }
 
+    @SuppressLint("Range")
+    fun setEventsData() {
+        eventsData = ArrayList<Activity>();
+        val db = DataBaseHandle(this, null)
+
+        val cursor = db.getCourse()
+        cursor!!.moveToFirst()
+
+        while(cursor.moveToNext()){
+            var title = cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl));
+            var type = cursor.getString(cursor.getColumnIndex(DataBaseHandle.TYPE_COL));
+            var location = cursor.getString(cursor.getColumnIndex(DataBaseHandle.LOCATION_COL));
+            var startDate = cursor.getString(cursor.getColumnIndex(DataBaseHandle.STARTDATE_COL));
+            var endDate = cursor.getString(cursor.getColumnIndex(DataBaseHandle.ENDDATE_COL));
+            eventsData.add(Activity(title, type, location, startDate, endDate));
+            println(eventsData[0]);
+        }
+        cursor?.close()
+
+        //eventsData.add(Activity("Title", "Namo" , "Scourge"));
+    }
+
     fun updateItems() {
         // Deal with the doto list section.
         toDoList = findViewById(R.id.mobile_list)
+        setEventsData()
         val customAdapter = ItemAdapter(applicationContext, eventsData)
         toDoList!!.setAdapter(customAdapter)
     }

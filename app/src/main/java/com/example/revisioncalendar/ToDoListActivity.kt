@@ -15,9 +15,7 @@ class ToDoListActivity : ComponentActivity() {
     var backButton : Button? = null;
     var addEventButton : Button? = null;
     var events = listOf(
-        Activity("ISY4699", "Lecture", "TBA"),
-        Activity("CS2510", "Lecture", "TBA"),
-        Activity("CS2110", "Lecture", "TBA")
+        Activity("ISY4699", "Lecture", "TBA", "23-3-2024", "23-3-2024"),
     );
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

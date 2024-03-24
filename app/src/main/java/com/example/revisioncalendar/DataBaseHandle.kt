@@ -15,7 +15,10 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val query = ("CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY, " +
                 NAME_COl + " TEXT," +
-                AGE_COL + " TEXT" + ")")
+                TYPE_COL + " TEXT," +
+                LOCATION_COL + " TEXT," +
+                STARTDATE_COL + " TEXT," +
+                ENDDATE_COL + " TEXT" + ")")
 
         // we are calling sqlite
         // method for executing our query
@@ -31,7 +34,7 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             onCreate(db)
         }
     }
-    fun addCourse(name : String, age : String ){
+    fun addCourse(name : String, type : String, location: String, start_date: String, end_date: String){
 
         // below we are creating
         // a content values variable
@@ -40,7 +43,10 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         // we are inserting our values
         // in the form of key-value pair
         values.put(NAME_COl, name)
-        values.put(AGE_COL, age)
+        values.put(TYPE_COL, type)
+        values.put(LOCATION_COL, location)
+        values.put(STARTDATE_COL, start_date)
+        values.put(ENDDATE_COL, end_date)
 
         // here we are creating a
         // writable variable of
@@ -94,7 +100,10 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val NAME_COl = "name"
 
         // below is the variable for age column
-        val AGE_COL = "age"
+        val TYPE_COL = "type"
+        var LOCATION_COL = "location"
+        var STARTDATE_COL = "start_date"
+        var ENDDATE_COL = "end_date"
     }
 
 }
