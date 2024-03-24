@@ -86,7 +86,6 @@ class ToDoListActivity : ComponentActivity() {
                 this@ToDoListActivity,
                 AddEventsActivity::class.java
             )
-            //intent.putExtra("Data",eventsData);
             startActivity(intent)
         })
 

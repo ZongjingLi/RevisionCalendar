@@ -80,7 +80,7 @@ class AddEventsActivity : ComponentActivity() {
             var start_time = startDateBlock?.getText().toString()//"23-3-2024"
             var end_time = endDateBlock?.getText()//"23-3-2024"
 
-            if (true || Utils.validName(title)) {
+            if (Utils.validName(title) && Utils.validTime(start_time) {
                 val db = DataBaseHandle(this, null)
                 val content = String.format("%s|%s|%s|%s|%s",title, type, location, start_time, end_time)
                 System.out.println(content)

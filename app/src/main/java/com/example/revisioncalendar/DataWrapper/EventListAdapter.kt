@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.revisioncalendar.DataBaseHandle
 import com.example.revisioncalendar.R
+import com.google.android.material.snackbar.Snackbar
 
 class EventListAdapter(private var events: ArrayList<Activity>?): RecyclerView.Adapter<EventListAdapter.ViewHolder>(){
     class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +41,6 @@ class EventListAdapter(private var events: ArrayList<Activity>?): RecyclerView.A
             button.setOnClickListener(
                 fun(v: View?) {
                     // Perform action on click
-                    System.out.println("clicked")
                     //DataBaseHandle db = new DataBaseHandle(this, null);
                     val content =
                         String.format(
@@ -56,6 +56,15 @@ class EventListAdapter(private var events: ArrayList<Activity>?): RecyclerView.A
                     if (db != null) {
                         db.deleteCourse(content)
                     }
+
+                    if (v != null) {
+                        Snackbar.make(
+                            v,
+                            "Deleted",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+
                     println("Deleted")
                 }
             )

@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.revisioncalendar.DataWrapper.Activity;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.SQLInput;
 import java.util.ArrayList;
@@ -70,9 +71,9 @@ public class ItemAdapter extends BaseAdapter {
                         activityList.get(i).startDate,
                         activityList.get(i).endDate
                         );
-                DataBaseHandle db = new DataBaseHandle(context, null);
-                db.deleteCourse(content);
+
                 System.out.println("Deleted");
+
             }
         });
 

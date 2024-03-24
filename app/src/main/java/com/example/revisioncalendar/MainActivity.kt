@@ -46,15 +46,15 @@ class MainActivity : ComponentActivity() {
             System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) + "\n")
             db.deleteCourse(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) );
         }
-
         db.addCourse("CS2110|Lecture|Online|23-3-2023|23-3-2024")
         db.addCourse("ISYE4699|Lecture|TBC|23-3-2023|23-3-2024")
         db.addCourse("CS2550|Lecture|InsCenter|23-3-2023|23-3-2024")
         db.addCourse("CS2699|Lecture|Clough|23-3-2023|25-3-2024");
-        db.addCourse("CS2004|Assignment|TBA|23-3-2023|25-3-2024");
+        db.addCourse("CS2004|Exam|TBA|23-3-2023|25-3-2024");
         db.addCourse("MATH3600|Exam|Klaus109|23-3-2023|24-3-2024");
         db.addCourse("MATH3110|Lecture|Klaus109|23-3-2023|24-3-2024");
-        **/
+         **/
+
 
         cursor?.close()
 

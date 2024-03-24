@@ -58,7 +58,19 @@ public class Utils {
         String regex = "^[a-zA-Z][a-zA-Z\\s]*$";
 
         // 使用正则表达式检查字符串是否符合规范
+        return true;
+    }
+
+    public static Boolean validTime(String str) {
+        if (str == null || str.isEmpty()) {
+            return false;
+        }
+
+        String regex = "^\\d{1,2}-\\d{1,2}-\\d{2}$";
+
+        // 使用正则表达式检查字符串是否符合规范
         return str.matches(regex);
+
     }
 
     public String activity2String() {
