@@ -1,11 +1,11 @@
 package com.example.revisioncalendar.DataWrapper;
 
 public class Activity {
-    private String title;
-    private String type;
-    private String location;
-    private String startDate;
-    private String endDate;
+    public String title;
+    public String type;
+    public String location;
+    public String startDate;
+    public String endDate;
 
     public Activity(String title, String type, String location, String start_date, String end_date) {
         this.title = title;

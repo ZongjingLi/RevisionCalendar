@@ -1,10 +1,12 @@
 package com.example.revisioncalendar
 
+import android.accounts.AccountManager.KEY_PASSWORD
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+
 
 class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
@@ -15,14 +17,12 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val query = ("CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY, " +
                 NAME_COl + " TEXT," +
-                TYPE_COL + " TEXT," +
-                LOCATION_COL + " TEXT," +
-                STARTDATE_COL + " TEXT," +
-                ENDDATE_COL + " TEXT" + ")")
+                TYPE_COL + " TEXT" + ")")
+
 
         // we are calling sqlite
         // method for executing our query
-        db.execSQL(query)
+        db.execSQL(query, null)
     }
 
 
@@ -34,19 +34,14 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             onCreate(db)
         }
     }
-    fun addCourse(name : String, type : String, location: String, start_date: String, end_date: String){
+    fun addCourse(name : String){
 
-        // below we are creating
-        // a content values variable
         val values = ContentValues()
 
         // we are inserting our values
         // in the form of key-value pair
         values.put(NAME_COl, name)
-        values.put(TYPE_COL, type)
-        values.put(LOCATION_COL, location)
-        values.put(STARTDATE_COL, start_date)
-        values.put(ENDDATE_COL, end_date)
+        //values.put(TYPE_COL, type)
 
         // here we are creating a
         // writable variable of
@@ -64,9 +59,6 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
     fun getCourse(): Cursor? {
 
-        // here we are creating a readable
-        // variable of our database
-        // as we want to read value from it
         val db = this.readableDatabase
 
         // below code returns a cursor to
@@ -84,6 +76,7 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     companion object{
         // here we have defined variables for our database
 
+
         // below is variable for database name
         private val DATABASE_NAME = "GEEKS_FOR_GEEKS"
 
@@ -97,13 +90,10 @@ class DataBaseHandle(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val ID_COL = "id"
 
         // below is the variable for name column
-        val NAME_COl = "name"
+        const val NAME_COl = "name"
 
         // below is the variable for age column
-        val TYPE_COL = "type"
-        var LOCATION_COL = "location"
-        var STARTDATE_COL = "start_date"
-        var ENDDATE_COL = "end_date"
+        const val TYPE_COL = "type"
     }
 
 }

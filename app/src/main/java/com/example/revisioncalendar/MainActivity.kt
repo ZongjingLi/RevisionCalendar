@@ -12,6 +12,7 @@ import android.widget.CalendarView.OnDateChangeListener
 import android.widget.ListView
 import androidx.activity.ComponentActivity
 import com.example.revisioncalendar.DataWrapper.Activity
+import com.example.revisioncalendar.Utils
 
 class MainActivity : ComponentActivity() {
     var buttonToActivity: Button? = null;
@@ -32,17 +33,23 @@ class MainActivity : ComponentActivity() {
 
         val db = DataBaseHandle(this, null)
 
-        db.addCourse("CS2110", "Lecture", "Claus109", "25-3-2024", "25-4-2024")
-        db.addCourse("ISYE4699", "Lecture", "TBA", "25-3-2024", "25-4-2024");
+
+        //db.addCourse("ISYE4699", "Lecture", "TBA", "25-3-2024", "25-4-2024");
 
 
         val cursor = db.getCourse()
         cursor!!.moveToFirst()
+        //System.out.println(cursor.getColumnIndex(DataBaseHandle.STARTDATE_COL));
+        //System.out.println(cursor.getColumnIndex(DataBaseHandle.ENDDATE_COL));
 
         while(cursor.moveToNext()){
-            System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) + "\n")
-            //db.deleteCourse(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) );
+            //System.out.println(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) + "\n")
+            db.deleteCourse(cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl)) );
         }
+        System.out.println(Utils.);
+        db.addCourse("CS2110")
+        db.addCourse("ISYE4699")
+        db.addCourse("CS2550")
         cursor?.close()
     }
 
@@ -79,12 +86,9 @@ class MainActivity : ComponentActivity() {
 
         while(cursor.moveToNext()){
             var title = cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl));
-            var type = cursor.getString(cursor.getColumnIndex(DataBaseHandle.TYPE_COL));
-            var location = cursor.getString(cursor.getColumnIndex(DataBaseHandle.LOCATION_COL));
-            var startDate = cursor.getString(cursor.getColumnIndex(DataBaseHandle.STARTDATE_COL));
-            var endDate = cursor.getString(cursor.getColumnIndex(DataBaseHandle.ENDDATE_COL));
-            eventsData.add(Activity(title, type, location, startDate, endDate));
-            println(eventsData[0]);
+
+            println(title);
+            eventsData.add(Activity(title, "Lecture" , "Scourge", "25-3-2022", "25-4-2022"));
         }
         cursor?.close()
 

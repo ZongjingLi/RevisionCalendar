@@ -1,17 +1,18 @@
 package com.example.revisioncalendar
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.revisioncalendar.DataWrapper.Activity;
 import com.example.revisioncalendar.DataWrapper.EventListAdapter
-import com.example.revisioncalendar.MainActivity;
+
 class ToDoListActivity : ComponentActivity() {
+    var eventsData : ArrayList<Activity>? = null
     var backButton : Button? = null;
     var addEventButton : Button? = null;
     var events = listOf(
@@ -21,10 +22,31 @@ class ToDoListActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.all_events);
         setButtons();
-        val adapter = EventListAdapter(events)
+
+        setEventsData()
+        val adapter = EventListAdapter(eventsData)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    @SuppressLint("Range")
+    fun setEventsData() {
+        eventsData = ArrayList<Activity>();
+        val db = DataBaseHandle(this, null)
+
+        val cursor = db.getCourse()
+        cursor!!.moveToFirst()
+
+        while(cursor.moveToNext()){
+            var title = cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl));
+
+            println(title);
+            eventsData!!.add(Activity(title, "Lecture" , "Scourge", "25-3-2022", "25-4-2022"));
+        }
+        cursor?.close()
+
+        //eventsData.add(Activity("Title", "Namo" , "Scourge"));
     }
 
     fun setButtons() {

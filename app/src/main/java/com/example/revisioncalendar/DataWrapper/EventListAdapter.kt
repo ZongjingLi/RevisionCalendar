@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.revisioncalendar.R
 
-class EventListAdapter(private var events: List<Activity>): RecyclerView.Adapter<EventListAdapter.ViewHolder>(){
+class EventListAdapter(private var events: ArrayList<Activity>?): RecyclerView.Adapter<EventListAdapter.ViewHolder>(){
     class ViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.objTitle)
         val typeTextView:  TextView = itemView.findViewById(R.id.eventType)
@@ -21,16 +21,16 @@ class EventListAdapter(private var events: List<Activity>): RecyclerView.Adapter
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = events.size
+    override fun getItemCount(): Int = events!!.size
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val events = events[position]
+        val events = events?.get(position)
         holder.apply{
-            titleTextView.text = events.title
-            typeTextView.text = events.type
+            titleTextView.text = events?.title
+            typeTextView.text = events?.type
             timeTextView.text = "Date"//"${events.from.toLocalDate()} ${events.from.toLocalTime()} - ${events.to.toLocalTime()}"
-            locationTextView.text = events.location
+            locationTextView.text = events?.location
         }
 
     }
