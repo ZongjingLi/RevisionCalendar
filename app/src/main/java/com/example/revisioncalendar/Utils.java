@@ -9,6 +9,8 @@ public class Utils {
         return 1;
     }
 
+
+
     public static Activity parseString(String string) throws IllegalAccessException {
         String[] comps = string.split("\\|");
 
@@ -28,7 +30,7 @@ public class Utils {
         ArrayList<Activity> outputs = new ArrayList<Activity>();
         for (int i=0; i<events.size();  i++) {
             Activity event = events.get(i);
-            if (event.type.equals(value)) {
+            if (event.type.equals(value) || value.equals("All")) {
                 outputs.add(event);
             }
         }

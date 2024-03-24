@@ -80,13 +80,13 @@
         android:clickable="true"
         android:text="Lecture"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ToDos"
+        app:layout_constraintEnd_toStartOf="@+id/All"
         app:layout_constraintTop_toBottomOf="@+id/month_YearTV"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <Button
-        android:id="@+id/ToDos"
+        android:id="@+id/All"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"

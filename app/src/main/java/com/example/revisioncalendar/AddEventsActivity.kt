@@ -2,9 +2,13 @@ package com.example.revisioncalendar
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import com.example.revisioncalendar.Utils
 
@@ -15,6 +19,8 @@ class AddEventsActivity : ComponentActivity() {
     var titleBlock: EditText? = null;
     var typeBlock: EditText? = null;
     var locationBlock: EditText? = null;
+    var startDateBlock: EditText? = null;
+    var endDateBlock: EditText? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_events);
@@ -26,11 +32,28 @@ class AddEventsActivity : ComponentActivity() {
         titleBlock = findViewById<View>(R.id.eventTitleInput) as EditText;
         typeBlock = findViewById<View>(R.id.eventsType) as EditText;
         locationBlock = findViewById<View>(R.id.eventsLocation) as EditText;
-
+        startDateBlock = findViewById<View>(R.id.StartDate) as EditText;
+        endDateBlock = findViewById<View>(R.id.endDate) as EditText;
     }
 
-    fun showPopUpWindow(content: String) {
+    var popupWindow: PopupWindow? = null
+    var showText: TextView? = null
+    fun showPopUpWindow(content: String, v: View){
+        val inflater = LayoutInflater.from(this)
+        val myview = inflater.inflate(R.layout.popup_window, null) //引用自定义布局
+        popupWindow = PopupWindow(myview, 1600, 1100) //后面是像素大小
 
+        showText = findViewById(R.id.name)
+        showText?.setText(content);
+
+
+        myview.findViewById<View>(R.id.close).setOnClickListener {
+            //updateActivities();
+            popupWindow!!.dismiss() //点击按钮对话框消
+            //Toast.makeText(this, "Clicked Leave", Toast.LENGTH_SHORT).show()
+        }
+        //System.out.println(intent.extras!!.get("Username"));
+        popupWindow!!.showAtLocation(v, 1, 0, 100)
     }
 
     fun setButtons() {
@@ -54,21 +77,24 @@ class AddEventsActivity : ComponentActivity() {
             var title = titleBlock?.getText().toString()
             var type = typeBlock?.getText().toString()
             var location = locationBlock?.getText().toString()
-            var start_time = "23-3-2024"
-            var end_time = "23-3-2024"
+            var start_time = startDateBlock?.getText().toString()//"23-3-2024"
+            var end_time = endDateBlock?.getText()//"23-3-2024"
 
             if (true || Utils.validName(title)) {
                 val db = DataBaseHandle(this, null)
-                db.addCourse(String.format("%s|%s|%s|%s|%s",title, type, location, start_time, end_time))
+                val content = String.format("%s|%s|%s|%s|%s",title, type, location, start_time, end_time)
+                System.out.println(content)
+                db.addCourse(content)
 
                 titleBlock?.setText("");
                 typeBlock?.setText("");
                 locationBlock?.setText("");
-                showPopUpWindow("Added Successfully")
+                startDateBlock?.setText("");
+                endDateBlock?.setText("");
+                //showPopUpWindow("Added Successfully", View)
 
             } else {
-                showPopUpWindow("Something is wrong");
-
+                //showPopUpWindow("Something is wrong", View);
             }
         })
     }

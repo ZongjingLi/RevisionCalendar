@@ -100,9 +100,9 @@ class ToDoListActivity : ComponentActivity() {
             filterEventsData("Lecture");
         })
 
-        toDosButton = findViewById<View>(R.id.ToDos) as Button;
+        toDosButton = findViewById<View>(R.id.All) as Button;
         toDosButton!!.setOnClickListener(View.OnClickListener {
-            filterEventsData("ToDos");
+            filterEventsData("All");
         })
     }
 
