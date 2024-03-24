@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.revisioncalendar.DataWrapper.Activity;
 
+import java.sql.SQLInput;
 import java.util.ArrayList;
 
 public class ItemAdapter extends BaseAdapter {
@@ -54,6 +55,7 @@ public class ItemAdapter extends BaseAdapter {
         activityTime.setText(activityList.get(i).endDate);
 
         button = view.findViewById(R.id.closeButton);
+        View finalView = view;
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -68,6 +70,8 @@ public class ItemAdapter extends BaseAdapter {
                         activityList.get(i).startDate,
                         activityList.get(i).endDate
                         );
+                DataBaseHandle db = new DataBaseHandle(context, null);
+                db.deleteCourse(content);
                 System.out.println("Deleted");
             }
         });
