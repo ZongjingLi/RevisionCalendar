@@ -20,7 +20,7 @@ public class Activity {
     public String getLocation() {return location;}
 
     public String toString() {
-        return this.title;
+        return String.format("Activity:%s",this.title);
     }
 
 }

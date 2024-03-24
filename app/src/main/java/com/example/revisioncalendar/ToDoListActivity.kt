@@ -8,22 +8,27 @@ import android.widget.Button
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.revisioncalendar.DataWrapper.Activity;
+import com.example.revisioncalendar.DataWrapper.Activity
 import com.example.revisioncalendar.DataWrapper.EventListAdapter
 
 class ToDoListActivity : ComponentActivity() {
     var eventsData : ArrayList<Activity>? = null
     var backButton : Button? = null;
     var addEventButton : Button? = null;
-    var events = listOf(
-        Activity("ISY4699", "Lecture", "TBA", "23-3-2024", "23-3-2024"),
-    );
+    var examButton: Button? = null;
+    var lectureButton: Button? = null;
+    var toDosButton: Button? = null;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.all_events);
         setButtons();
 
         setEventsData()
+        updateEventsList()
+    }
+
+    fun updateEventsList() {
         val adapter = EventListAdapter(eventsData)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = adapter
@@ -39,14 +44,29 @@ class ToDoListActivity : ComponentActivity() {
         cursor!!.moveToFirst()
 
         while(cursor.moveToNext()){
-            var title = cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl));
+            var content = cursor.getString(cursor.getColumnIndex(DataBaseHandle.NAME_COl));
 
-            println(title);
-            eventsData!!.add(Activity(title, "Lecture" , "Scourge", "25-3-2022", "25-4-2022"));
+            var eventContent = Utils.parseString(content)
+            eventsData!!.add(Activity(eventContent.title,
+                eventContent.type , eventContent.location,
+                eventContent.startDate, eventContent.endDate));
         }
         cursor?.close()
 
-        //eventsData.add(Activity("Title", "Namo" , "Scourge"));
+
+        // get the date events
+        val extras = intent.extras
+        val value = extras!!.getString("Date")
+
+        eventsData = Utils.filterEndDate(eventsData, value)
+    }
+
+    @SuppressLint("Range")
+    fun filterEventsData(typeValue: String) {
+        setEventsData()
+
+        eventsData = Utils.filterType(eventsData, typeValue)
+        updateEventsList()
     }
 
     fun setButtons() {
@@ -68,6 +88,21 @@ class ToDoListActivity : ComponentActivity() {
             )
             //intent.putExtra("Data",eventsData);
             startActivity(intent)
+        })
+
+        examButton = findViewById<View>(R.id.Exam) as Button;
+        examButton!!.setOnClickListener(View.OnClickListener {
+            filterEventsData("Exam");
+        })
+
+        lectureButton = findViewById<View>(R.id.Lecture) as Button;
+        lectureButton!!.setOnClickListener(View.OnClickListener {
+            filterEventsData("Lecture");
+        })
+
+        toDosButton = findViewById<View>(R.id.ToDos) as Button;
+        toDosButton!!.setOnClickListener(View.OnClickListener {
+            filterEventsData("ToDos");
         })
     }
 

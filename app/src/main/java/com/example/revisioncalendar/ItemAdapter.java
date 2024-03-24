@@ -44,6 +44,7 @@ public class ItemAdapter extends BaseAdapter {
         activityName.setText(activityList.get(i).getTitle());
         activityType.setText(activityList.get(i).getType());
         activityLocation.setText(activityList.get(i).getLocation());
+        activityTime.setText(activityList.get(i).endDate);
 
         return view;
     }
