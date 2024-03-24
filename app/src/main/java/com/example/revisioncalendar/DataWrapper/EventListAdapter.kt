@@ -34,11 +34,11 @@ class EventListAdapter(private var events: ArrayList<Activity>?): RecyclerView.A
         holder.apply{
             titleTextView.text = event?.title
             typeTextView.text = event?.type
-            timeTextView.text = "Date"//"${events.from.toLocalDate()} ${events.from.toLocalTime()} - ${events.to.toLocalTime()}"
+            timeTextView.text = event?.endDate //"Date"//"${events.from.toLocalDate()} ${events.from.toLocalTime()} - ${events.to.toLocalTime()}"
             locationTextView.text = event?.location
             var i = position
-            button.setOnClickListener(View.OnClickListener {
-                fun onClick(v: View?) {
+            button.setOnClickListener(
+                fun(v: View?) {
                     // Perform action on click
                     System.out.println("clicked")
                     //DataBaseHandle db = new DataBaseHandle(this, null);
@@ -58,7 +58,7 @@ class EventListAdapter(private var events: ArrayList<Activity>?): RecyclerView.A
                     }
                     println("Deleted")
                 }
-            })
+            )
         }
         System.out.println(position);
 
