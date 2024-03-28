@@ -52,7 +52,7 @@ class ToDoListActivity : ComponentActivity() {
                 eventContent.startDate, eventContent.endDate));
         }
         cursor?.close()
-
+        eventsData = Utils.sortByDate(eventsData);
 
         // get the date events
         val extras = intent.extras

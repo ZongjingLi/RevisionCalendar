@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
     var calendarView: CalendarView? = null;
     var toDoList: ListView? = null
 
-    var curDate: String? = "28-3-2024";
+    var curDate: String? = "29-3-2024";
 
     @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,8 +103,6 @@ class MainActivity : ComponentActivity() {
         }
         cursor?.close()
 
-        //eventsData.add(Activity("Title", "Namo" , "Scourge"));
-        System.out.println(curDate)
         eventsData = Utils.filterEndDate(eventsData, curDate)
     }
 
@@ -112,6 +110,7 @@ class MainActivity : ComponentActivity() {
         // Deal with the doto list section.
         toDoList = findViewById(R.id.mobile_list)
         setEventsData()
+        eventsData = Utils.sortByDate(eventsData);
         val customAdapter = ItemAdapter(applicationContext, eventsData)
         toDoList!!.setAdapter(customAdapter)
     }

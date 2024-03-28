@@ -11,11 +11,15 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+
+import android.content.ContentValues;
+
 import com.example.revisioncalendar.DataWrapper.Activity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.SQLInput;
 import java.util.ArrayList;
+import android.content.Context;
 
 public class ItemAdapter extends BaseAdapter {
     Context context;
@@ -62,7 +66,7 @@ public class ItemAdapter extends BaseAdapter {
                 // Perform action on click
 
 
-                //DataBaseHandle db = new DataBaseHandle(this, null);
+                //DataBaseHandle db = new DataBaseHandle(Context, null);
 
                 String content = String.format("%s|%s|%s|%s|%s",
                         activityList.get(i).getTitle(),
@@ -71,7 +75,6 @@ public class ItemAdapter extends BaseAdapter {
                         activityList.get(i).startDate,
                         activityList.get(i).endDate
                         );
-
                 System.out.println("Deleted");
 
             }

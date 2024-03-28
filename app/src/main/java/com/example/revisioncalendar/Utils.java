@@ -3,13 +3,11 @@ package com.example.revisioncalendar;
 import com.example.revisioncalendar.DataWrapper.Activity;
 
 import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Utils {
-    public static int compareDate(String date1, String date2) {
-        return 1;
-    }
-
-
 
     public static Activity parseString(String string) throws IllegalAccessException {
         String[] comps = string.split("\\|");
@@ -50,6 +48,56 @@ public class Utils {
         return outputs;
     }
 
+    public static int compareDate(String date1, String date2) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            String[] d1 = date1.split("-");
+            String[] d2 = date2.split("-");
+            int yearDiff = Integer.parseInt(d1[2]) - Integer.parseInt(d2[2]);
+            int monthDiff = Integer.parseInt(d1[1]) - Integer.parseInt(d2[1]);
+            int dayDiff = Integer.parseInt(d1[0]) - Integer.parseInt(d2[0]);
+            if (yearDiff < 0) {
+                return 1;
+            } else if (yearDiff > 0) {
+                return -1;
+            } else if (monthDiff < 0) {
+                return 1;
+            } else if (monthDiff > 0) {
+                return -1;
+            } else if (dayDiff < 0) {
+                return 1;
+            } else {
+                return -1;
+            }
+        } catch (Exception e) {
+            System.out.println(String.format("%s %s",date1, date2));
+            e.printStackTrace();
+
+            // 如果日期格式不正确，可以根据需要进行异常处理
+        }
+        return 1;
+    }
+
+    public static ArrayList<Activity> sortByDate(ArrayList<Activity> events) {
+        ArrayList<Activity> outputs = new ArrayList<Activity>();
+        int N = events.size();
+        for (int i = 0; i < N; i++) {
+            int min = 0;
+            String minDate = events.get(0).endDate;
+            for (int j = 1; j < events.size(); j++) {
+                Activity event = events.get(j);
+                if (compareDate(event.endDate,minDate) >= 0) {
+                    min = j;
+                    minDate = event.endDate;
+                }
+            }
+            System.out.println(minDate);
+            outputs.add(events.get(min));
+            events.remove(min);
+        }
+        return outputs;
+    }
+
     public static Boolean validName(String str) {
         if (str == null || str.isEmpty()) {
             return false;
@@ -75,4 +123,6 @@ public class Utils {
     public String activity2String() {
         return "";
     }
+
+
 }
