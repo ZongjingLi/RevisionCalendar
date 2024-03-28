@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
     var calendarView: CalendarView? = null;
     var toDoList: ListView? = null
 
-    var curDate: String? = "24-3-2024";
+    var curDate: String? = "28-3-2024";
 
     @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {

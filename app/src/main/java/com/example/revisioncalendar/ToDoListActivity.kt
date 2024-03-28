@@ -58,7 +58,7 @@ class ToDoListActivity : ComponentActivity() {
         val extras = intent.extras
         val value = extras!!.getString("Date")
 
-        eventsData = Utils.filterEndDate(eventsData, value)
+        //eventsData = Utils.filterEndDate(eventsData, value)
     }
 
     @SuppressLint("Range")
